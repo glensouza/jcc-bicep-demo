@@ -3,11 +3,17 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
+#no triggers
+#trigger:
+#- main
 
 pool:
   vmImage: ubuntu-latest
+
+parameters:
+  - name: "webApps"
+    type: object
+    default: {}
 
 steps:
 - script: echo Hello, world!
@@ -17,3 +23,14 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- ${{ each webApp in parameters.webApps }}:
+  - task: AzureRmWebAppDeployment@4
+    inputs:
+      ConnectionType: 'AzureRM'
+      azureSubscription: 'Azure-VSE-Subscription'
+      appType: 'webAppContainer'
+      WebAppName: '${{ webApp }}'
+      DockerNamespace: 'registrynamespace'
+      DockerRepository: 'image'
+      DockerImageTag: 'latest'
