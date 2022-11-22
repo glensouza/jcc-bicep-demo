@@ -1,0 +1,9 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": [
+            "vscode-vfs://github%2B7b2276223a312c22726566223a7b2274797065223a362c226964223a226d61696e227d7d/glensouza/jcc-bicep-demo/deploy/deploy.yml",
+            "vscode-vfs://github%2B7b2276223a312c22726566223a7b2274797065223a362c226964223a226d61696e227d7d/glensouza/jcc-bicep-demo/code/app-build.yml",
+            "vscode-vfs://github%2B7b2276223a312c22726566223a7b2274797065223a362c226964223a226d61696e227d7d/glensouza/jcc-bicep-demo/infrastructure/azure-bicep.yml"
+        ]
+    }
+}
