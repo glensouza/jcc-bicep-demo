@@ -8,9 +8,10 @@ parameters:
   - name: counties
     type: object
     default:
-      - 001|1|CountyA
+      - 001|1|Sacramento
       - 002|1|CountyB
       - 003|2|CountyC
+      - 004|1|Orange
 
 variables:
   County: ''
@@ -59,3 +60,5 @@ steps:
       displayName: 'Display CountyName'
     - script: echo "$(FarmId)"
       displayName: 'Display FarmId'
+    - bicep Prefix nprd, countyid ct001, farm df1
+    - deploy latest image to each app service
