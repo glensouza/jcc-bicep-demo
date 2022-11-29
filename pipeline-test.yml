@@ -32,15 +32,15 @@ steps:
         echo "##vso[task.setvariable variable=FarmId;]${countyInfo[1]}"
         echo "##vso[task.setvariable variable=CountyName;]${countyInfo[2]}"
       displayName: 'Execute County: ${{ county }}'
-    - script: echo ${{ county }}
+    - script: echo "${{ county }}"
       displayName: 'Display ${{ county }}'
     - script: echo $(environment)
       displayName: 'Display Environment'
-    - script: echo $(County)
+    - script: echo "$(County)"
       displayName: 'Display County'
-    - script: echo $(CountyId)
+    - script: echo "$(CountyId)"
       displayName: 'Display CountyId'
-    - script: echo $(CountyName)
+    - script: echo "$(CountyName)"
       displayName: 'Display CountyName'
-    - script: echo $(FarmId)
+    - script: echo "$(FarmId)"
       displayName: 'Display FarmId'
