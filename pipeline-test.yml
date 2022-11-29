@@ -24,12 +24,21 @@ variables:
   - name: CountyId
   - name: CountyName
   - name: FarmId
+  - name: env
+  ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+    value: 'prod'
+  ${{ elseif eq(variables['Build.SourceBranchName'], 'stage' }}:
+    value: 'stage'
+  ${{ else }}:
+    value: 'dev'
 
 steps:
   - script: echo "$(Build.SourceBranchName)"
     displayName: 'Display Source Branch Name'
   - script: echo "${{parameters.environment}}"
     displayName: 'Display Environment'
+  - script: echo "$(env)"
+    displayName: 'Display Env'
   - ${{ each county in parameters.counties }}:
     - script: |
         IFS='|'
