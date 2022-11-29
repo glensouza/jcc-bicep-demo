@@ -1,3 +1,9 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
 parameters:
   - name: environment
     type: string
