@@ -21,7 +21,7 @@ steps:
     - script: echo "##vso[task.setvariable variable=myVar;]foo"
       displayName: 'Set Variable'
     - script: echo ${{ user }}
-      displayName: 'Create user ${{ myVar }}'
+      displayName: 'Create user $(myVar)'
     # - script: echo "You can use macro syntax for variables: $(myVar)"
     #   displayName: 'Read Variable'
 
