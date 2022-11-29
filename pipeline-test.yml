@@ -20,6 +20,8 @@ variables:
   - name: FarmId
 
 steps:
+  - script: echo "$(environment)"
+    displayName: 'Display Environment'
   - ${{ each county in parameters.counties }}:
     - script: |
         IFS='|'
@@ -34,8 +36,6 @@ steps:
       displayName: 'Execute County: ${{ county }}'
     - script: echo "${{ county }}"
       displayName: 'Display ${{ county }}'
-    - script: echo "$(environment)"
-      displayName: 'Display Environment'
     - script: echo "$(County)"
       displayName: 'Display County'
     - script: echo "$(CountyId)"
