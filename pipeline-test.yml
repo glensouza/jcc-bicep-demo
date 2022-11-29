@@ -13,6 +13,9 @@ parameters:
       - jane
       - bob
 
+variables:
+  - name: myVar
+
 steps:
   - ${{ each user in parameters.users }}:
     - script: echo "##vso[task.setvariable variable=myVar;]foo"
