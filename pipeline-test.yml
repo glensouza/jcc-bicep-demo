@@ -34,7 +34,7 @@ steps:
       displayName: 'Execute County: ${{ county }}'
     - script: echo "${{ county }}"
       displayName: 'Display ${{ county }}'
-    - script: echo $(environment)
+    - script: echo "$(environment)"
       displayName: 'Display Environment'
     - script: echo "$(County)"
       displayName: 'Display County'
