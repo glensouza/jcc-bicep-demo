@@ -37,8 +37,6 @@ steps:
     displayName: 'Display Prefix'
   - script: echo "$(Build.SourceBranchName)"
     displayName: 'Display Source Branch Name'
-  - script: echo "${{parameters.environment}}"
-    displayName: 'Display Environment'
   - ${{ each county in parameters.counties }}:
     - script: |
         IFS='|'
