@@ -39,9 +39,9 @@ steps:
           echo "##vso[task.setvariable variable=Prefix;]nprd"
           ;;
       esac
-    displayName: 'Set Env Variable'
-  - script: echo "$(Env)"
-    displayName: 'Display Env'
+    displayName: 'Set Prefix'
+  - script: echo "$(Prefix)"
+    displayName: 'Display Prefix'
   - script: echo "$(Build.SourceBranchName)"
     displayName: 'Display Source Branch Name'
   - script: echo "${{parameters.environment}}"
