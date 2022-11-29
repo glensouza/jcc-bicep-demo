@@ -20,7 +20,7 @@ variables:
   - name: FarmId
 
 steps:
-  - script: echo "${environment}"
+  - script: echo "${{ parameters.environment}}"
     displayName: 'Display Environment'
   - ${{ each county in parameters.counties }}:
     - script: |
