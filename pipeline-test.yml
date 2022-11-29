@@ -20,25 +20,32 @@ parameters:
       - 003|2|CountyC
 
 variables:
-  - name: County
-  - name: CountyId
-  - name: CountyName
-  - name: FarmId
-  - name: env
-  ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-    value: 'prod'
-  ${{ elseif eq(variables['Build.SourceBranchName'], 'stage' }}:
-    value: 'stage'
-  ${{ else }}:
-    value: 'dev'
+  County: ''
+  CountyId: ''
+  CountyName: ''
+  FarmId: ''
+  Prefix: ''
 
 steps:
+  - script: |
+      case $(Build.SourceBranchName) in
+        main)
+          echo "##vso[task.setvariable variable=Prefix;]prd"
+          ;;
+        stage)
+          echo "##vso[task.setvariable variable=Prefix;]stage"
+          ;;
+        *)
+          echo "##vso[task.setvariable variable=Prefix;]nprd"
+          ;;
+      esac
+    displayName: 'Set Env Variable'
+  - script: echo "$(Env)"
+    displayName: 'Display Env'
   - script: echo "$(Build.SourceBranchName)"
     displayName: 'Display Source Branch Name'
   - script: echo "${{parameters.environment}}"
     displayName: 'Display Environment'
-  - script: echo "$(env)"
-    displayName: 'Display Env'
   - ${{ each county in parameters.counties }}:
     - script: |
         IFS='|'
