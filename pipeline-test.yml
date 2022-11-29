@@ -26,8 +26,8 @@ variables:
   - name: FarmId
 
 steps:
-  - script: echo "$(Build.SourceBranch)"
-    displayName: 'Display Source Branch'
+  - script: echo "$(Build.SourceBranchName)"
+    displayName: 'Display Source Branch Name'
   - script: echo "${{parameters.environment}}"
     displayName: 'Display Environment'
   - ${{ each county in parameters.counties }}:
