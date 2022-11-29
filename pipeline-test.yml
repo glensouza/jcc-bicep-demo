@@ -14,9 +14,6 @@ parameters:
       - bob
 
 steps:
-  - ${{ each parameter in parameters }}:
-    - script: echo "${{ parameter.value }}"
-      displayName: Print ${{ parameter.key }}
   - ${{ each user in parameters.users }}:
     - script: create-user.sh ${{ user }}
       displayName: 'Create user ${{ user }}'
