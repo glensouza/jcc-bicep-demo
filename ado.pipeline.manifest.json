@@ -1,12 +1,10 @@
 {
-    "environments": [ "UAT", "PROD" ],
     "sites": [
         {
             "court": {
                 "id": 1,
                 "name": "County One"
             },
-            "resourceGroup": "JCCDemo1",
             "farmId": 1
         },
         {
@@ -14,7 +12,6 @@
                 "id": 2,
                 "name": "County Two"
             },
-            "resourceGroup": "JCCDemo1",
             "farmId": 1
         },
         {
@@ -22,7 +19,6 @@
                 "id": 3,
                 "name": "County Three"
             },
-            "resourceGroup": "JCCDemo1",
             "farmId": 2
         }
     ]
