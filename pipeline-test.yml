@@ -1,0 +1,28 @@
+parameters:
+  - name: environment
+    type: string
+    default: develop
+    values:
+    - production
+    - staging
+    - develop
+  - name: users
+    type: object
+    default:
+      - john
+      - jane
+      - bob
+
+steps:
+  - ${{ each parameter in parameters }}:
+    - script: echo "${{ parameter.value }}"
+      displayName: Print ${{ parameter.key }}
+  - ${{ each user in parameters.users }}:
+    - script: create-user.sh ${{ user }}
+      displayName: 'Create user ${{ user }}'
+    - script: grant-database-access.sh ${{ user }}
+      displayName: 'Grant database access to ${{ user }}'
+    - script: grant-datafactory-access.sh ${{ user }}
+      displayName: 'Grant Data Factory access to ${{ user }}'
+  - script: echo "##vso[task.setvariable variable=myVar;]foo"
+  - script: echo "You can use macro syntax for variables: $(myVar)"
