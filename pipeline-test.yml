@@ -5,13 +5,6 @@ pool:
   vmImage: ubuntu-latest
 
 parameters:
-  - name: environment
-    type: string
-    default: develop
-    values:
-    - production
-    - staging
-    - develop
   - name: counties
     type: object
     default:
