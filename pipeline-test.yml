@@ -60,5 +60,3 @@ steps:
       displayName: 'Display CountyName'
     - script: echo "$(FarmId)"
       displayName: 'Display FarmId'
-    - bicep Prefix nprd, countyid ct001, farm df1
-    - deploy latest image to each app service
