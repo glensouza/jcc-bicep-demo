@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
     - code
+    - release
     - pipeline-app-build.yml
     - pipeline-template-deploy.yml
 
@@ -51,6 +52,8 @@ steps:
 
       rm -rf $(Build.ArtifactStagingDirectory)/build-image.txt
       echo $(tag) > $(Build.ArtifactStagingDirectory)/build-image.txt
+
+      cp -r $(Build.SourcesDirectory)/releasePipeline/release.ps1 $(Build.ArtifactStagingDirectory)
     displayName: 'Initialize drop files'
   - ${{ each county in parameters.counties }}:
     - script: |

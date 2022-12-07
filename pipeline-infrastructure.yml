@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
     - infrastructure
+    - relase
     - pipeline-infrastructure.yml
     - pipeline-template-bicep.yml
 
@@ -44,6 +45,15 @@ steps:
     displayName: 'Display Prefix'
   - script: echo "$(Build.SourceBranchName)"
     displayName: 'Display Source Branch Name'
+  - script: |
+      rm -rf $(Build.ArtifactStagingDirectory)/manifest.txt
+      touch $(Build.ArtifactStagingDirectory)/manifest.txt
+
+      rm -rf $(Build.ArtifactStagingDirectory)/build-image.txt
+      echo $(tag) > $(Build.ArtifactStagingDirectory)/build-image.txt
+
+      cp -r $(Build.SourcesDirectory)/releasePipeline/release.ps1 $(Build.ArtifactStagingDirectory)
+    displayName: 'Initialize drop files'
   - ${{ each county in parameters.counties }}:
     - script: |
         IFS='|'
