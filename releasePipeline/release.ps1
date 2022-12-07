@@ -1,10 +1,10 @@
 Write-Host username: ${env:username}
+Write-Host personalaccesstoken: ${env:personalaccesstoken}
 
 $pair = "${env:username}:${env:personalaccesstoken}"
 $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
 $base64 = [System.Convert]::ToBase64String($bytes)
 $basicAuthValue = "Basic $base64"
-
 
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
