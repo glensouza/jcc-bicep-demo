@@ -25,6 +25,7 @@ variables:
   CountyName: ''
   FarmId: ''
   Prefix: ''
+  ImageLabel: '12345'
 
 steps:
   - script: |
@@ -44,6 +45,13 @@ steps:
     displayName: 'Display Prefix'
   - script: echo "$(Build.SourceBranchName)"
     displayName: 'Display Source Branch Name'
+  - script: |
+      rm -rf $(Build.ArtifactStagingDirectory)/manifest.txt
+      touch $(Build.ArtifactStagingDirectory)/manifest.txt
+
+      rm -rf $(Build.ArtifactStagingDirectory)/build-image.txt
+      echo $(tag) > $(Build.ArtifactStagingDirectory)/build-image.txt
+    displayName: 'Initialize drop files'
   - ${{ each county in parameters.counties }}:
     - script: |
         IFS='|'
@@ -55,6 +63,7 @@ steps:
         echo "##vso[task.setvariable variable=CountyId;]${countyInfo[0]}"
         echo "##vso[task.setvariable variable=FarmId;]${countyInfo[1]}"
         echo "##vso[task.setvariable variable=CountyName;]${countyInfo[2]}"
+        echo "${{county}}" >> $(Build.ArtifactStagingDirectory)/manifest.txt
       displayName: 'Execute County: ${{ county }}'
     - script: echo "${{county}}"
       displayName: 'Display ${{county}}'
@@ -78,3 +87,9 @@ steps:
         farmId: $(FarmId)
         countyId: $(CountyId)
         countyName: $(CountyName)
+        imageLabel: $(ImageLabel)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'

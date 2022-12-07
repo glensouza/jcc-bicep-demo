@@ -17,6 +17,9 @@ parameters:
   - name: Prefix
     type: string
     default: ''
+  - name: ImageLabel
+    type: string
+    default: ''
 
 steps:
   - script: |
@@ -25,6 +28,7 @@ steps:
       echo "County Name: ${{parameters.CountyName}}"
       echo "Farm Id: ${{parameters.FarmId}}"
       echo "Prefix: ${{parameters.Prefix}}"
+      echo "Image Label: ${{parameters.ImageLabel}}"
     displayName: 'Display Parameters Received in Release Pipeline'
   - template: /pipeline-template-bicep.yml
     parameters:
@@ -38,3 +42,4 @@ steps:
       farmId: ${{parameters.FarmId}}
       countyId: ${{parameters.CountyId}}
       countyName: ${{parameters.CountyName}}
+      imageLabel: ${{parameters.ImageLabel}}

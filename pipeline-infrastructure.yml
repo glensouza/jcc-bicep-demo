@@ -78,3 +78,9 @@ steps:
         farmId: $(FarmId)
         countyId: $(CountyId)
         countyName: $(CountyName)
+        imageLabel: 'latest'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
