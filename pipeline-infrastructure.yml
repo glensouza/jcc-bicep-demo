@@ -1,0 +1,106 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# trigger:
+# - main
+
+# pool:
+#   vmImage: ubuntu-latest
+
+# steps:
+# - script: echo Hello, world!
+#   displayName: 'Run a one-line script'
+
+# - script: |
+#     echo Add other tasks to build, test, and deploy your project.
+#     echo See https://aka.ms/yaml
+#   displayName: 'Run a multi-line script'
+
+# - template: /deploy/deploy.yml
+
+
+
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - code
+    - pipeline-infrastructure.yml
+    - pipeline-template-bicep.yml
+
+pool:
+  vmImage: ubuntu-latest
+
+parameters:
+  - name: counties
+    type: object
+    default:
+      - 001|1|Sacramento
+      - 002|1|CountyB
+      - 003|2|CountyC
+      - 004|1|Orange
+
+variables:
+  County: ''
+  CountyId: ''
+  CountyName: ''
+  FarmId: ''
+  Prefix: ''
+
+steps:
+  - script: |
+      case $(Build.SourceBranchName) in
+        main)
+          echo "##vso[task.setvariable variable=Prefix;]prd"
+          ;;
+        stage)
+          echo "##vso[task.setvariable variable=Prefix;]stage"
+          ;;
+        *)
+          echo "##vso[task.setvariable variable=Prefix;]nprd"
+          ;;
+      esac
+    displayName: 'Set Prefix'
+  - script: echo "$(Prefix)"
+    displayName: 'Display Prefix'
+  - script: echo "$(Build.SourceBranchName)"
+    displayName: 'Display Source Branch Name'
+  - ${{ each county in parameters.counties }}:
+    - script: |
+        IFS='|'
+        read -a countyInfo <<< "${{county}}"
+        echo "CountyId: ${countyInfo[0]}"
+        echo "CountyName : ${countyInfo[2]}"
+        echo "FarmId : ${countyInfo[1]}"
+        echo "##vso[task.setvariable variable=County;]${{county}}"
+        echo "##vso[task.setvariable variable=CountyId;]${countyInfo[0]}"
+        echo "##vso[task.setvariable variable=FarmId;]${countyInfo[1]}"
+        echo "##vso[task.setvariable variable=CountyName;]${countyInfo[2]}"
+      displayName: 'Execute County: ${{ county }}'
+    - script: echo "${{county}}"
+      displayName: 'Display ${{county}}'
+    - script: echo "$(County)"
+      displayName: 'Display County'
+    - script: echo "$(CountyId)"
+      displayName: 'Display CountyId'
+    - script: echo "$(CountyName)"
+      displayName: 'Display CountyName'
+    - script: echo "$(FarmId)"
+      displayName: 'Display FarmId'
+    - template: /pipeline-template-bicep.yml
+      parameters:
+        prefix: $(Prefix)
+        farmId: $(FarmId)
+        countyId: $(CountyId)
+        countyName: $(CountyName)
+    - template: /pipeline-template-deploy.yml
+      parameters:
+        prefix: $(Prefix)
+        farmId: $(FarmId)
+        countyId: $(CountyId)
+        countyName: $(CountyName)

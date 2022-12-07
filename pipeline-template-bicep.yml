@@ -1,0 +1,22 @@
+parameters:
+  - name: CountyId
+    type: string
+    default: ''
+  - name: CountyName
+    type: string
+    default: ''
+  - name: FarmId
+    type: string
+    default: ''
+  - name: Prefix
+    type: string
+    default: ''
+
+steps:
+  - script: |
+      echo "Inside pipeline-template-bicep.yml"
+      echo "County Id: ${{CountyId}}"
+      echo "County Name: ${{CountyName}}"
+      echo "Farm Id: ${{FarmId}}"
+      echo "Prefix: ${{Prefix}}"
+    displayName: 'Display Parameters'
