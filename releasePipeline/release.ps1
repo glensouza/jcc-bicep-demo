@@ -1,16 +1,22 @@
-$pair = "${env:username}:${env:personalaccesstoken}"
-$bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
-$base64 = [System.Convert]::ToBase64String($bytes)
-$basicAuthValue = "Basic $base64"
-
 Write-Host username: ${env:username}
-Write-Host personalaccesstoken: ${env:personalaccesstoken}
+
+$pair = "${env:username}:${env:personalaccesstoken}"
+Write-Host pair: $pair
+
+$bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
+Write-Host bytes: $bytes
+
+$base64 = [System.Convert]::ToBase64String($bytes)
+Write-Host base64: $base64
+
+$basicAuthValue = "Basic $base64"
 Write-Host basicAuthValue: $basicAuthValue
 
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
-#$headers.Add("Authorization", $basicAuthValue)
-$headers.Add("Authorization", "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx")
+$headers.Add("Authorization", "Basic $base64")
+#$headers.Add("Authorization", "$basicAuthValue")
+#$headers.Add("Authorization", "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx")
 $headers.Add("Cookie", "VstsSession=%7B%22PersistentSessionId%22%3A%2296afd73e-2109-407b-8119-42e9b5887e48%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D; X-VSS-UseRequestRouting=True")
 
 $body = "{
