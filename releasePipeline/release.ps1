@@ -1,24 +1,9 @@
-Write-Host username: ${env:username}
-Write-Host personalaccesstoken: ${env:personalaccesstoken}
-
-$pair = "${env:username}:${env:personalaccesstoken}"
-Write-Host pair: $pair
-
-$bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
-Write-Host bytes: $bytes
-
-$base64 = [System.Convert]::ToBase64String($bytes)
-Write-Host base64: $base64
-
-$basicAuthValue = "Basic $base64"
-Write-Host basicAuthValue: $basicAuthValue
+Write-Host basicAuth:  ${env:basicAuth}
 Write-Host LookingFor: "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx"
 
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
-#$headers.Add("Authorization", "Basic $base64")
-$headers.Add("Authorization", "$basicAuthValue")
-#$headers.Add("Authorization", "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx")
+$headers.Add("Authorization", ${env:basicAuth})
 
 $body = "{
 `n    `"definitionId`": { `"id`": 23 },
