@@ -1,4 +1,14 @@
+Write-Host username: ${username}
+Write-Host username: ${env:username}
+Write-Host username: $env:{username}
+Write-Host username: ${env:(username)}
+Write-Host username: $(username)
+Write-Host username: $(env:username)
 Write-Host username: $env:(username)
+Write-Host username: $(env:username)
+Write-Host username: $(env:{username})
+
+
 $pair = "$(username):$(personalaccesstoken)"
 $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
 $base64 = [System.Convert]::ToBase64String($bytes)
