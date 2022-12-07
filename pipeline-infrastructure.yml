@@ -5,7 +5,7 @@ trigger:
   paths:
     include:
     - infrastructure
-    - relase
+    - releasePipeline
     - pipeline-infrastructure.yml
     - pipeline-template-bicep.yml
 
