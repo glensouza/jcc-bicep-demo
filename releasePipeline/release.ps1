@@ -1,12 +1,5 @@
 Write-Host username: ${env:username}
 
-#$securePassword = ConvertTo-SecureString -String ${env:personalaccesstoken} -AsPlainText
-#Write-Host securePassword: $securePassword
-
-#$credential = [PSCredential]::new(${env:username}, $securePassword)
-$credential = [PSCredential]::new(${env:username}, ${env:personalaccesstoken})
-Write-Host credential: $credential
-
 $pair = "${env:username}:${env:personalaccesstoken}"
 Write-Host pair: $pair
 
@@ -23,7 +16,7 @@ Write-Host LookingFor: "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaD
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
 #$headers.Add("Authorization", "Basic $base64")
-#$headers.Add("Authorization", "$basicAuthValue")
+$headers.Add("Authorization", "$basicAuthValue")
 #$headers.Add("Authorization", "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx")
 
 $body = "{
@@ -38,6 +31,5 @@ $body = "{
 `n}
 `n"
 
-#$response = Invoke-RestMethod 'https://dev.azure.com/glenster75/jcc%20Bicep%20Demo/_apis/pipelines/23/runs?&api-version=6.1-preview.1' -Method 'POST' -Headers $headers -Body $body
-$response = Invoke-RestMethod -Uri "https://dev.azure.com/glenster75/jcc%20Bicep%20Demo/_apis/pipelines/23/runs?&api-version=6.1-preview.1"  -Method 'POST' -Headers $headers -Body $body -Authentication Basic -Credential $credential
+$response = Invoke-RestMethod 'https://dev.azure.com/glenster75/jcc%20Bicep%20Demo/_apis/pipelines/23/runs?&api-version=6.1-preview.1' -Method 'POST' -Headers $headers -Body $body
 $response | ConvertTo-Json
