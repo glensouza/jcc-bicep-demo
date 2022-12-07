@@ -1,9 +1,10 @@
 Write-Host username: ${env:username}
 
-$securePassword = ConvertTo-SecureString -String ${env:personalaccesstoken} -AsPlainText
-Write-Host securePassword: $securePassword
+#$securePassword = ConvertTo-SecureString -String ${env:personalaccesstoken} -AsPlainText
+#Write-Host securePassword: $securePassword
 
-$credential = [PSCredential]::new(${env:username}, $securePassword)
+#$credential = [PSCredential]::new(${env:username}, $securePassword)
+$credential = [PSCredential]::new(${env:username}, ${env:personalaccesstoken})
 Write-Host credential: $credential
 
 $pair = "${env:username}:${env:personalaccesstoken}"
