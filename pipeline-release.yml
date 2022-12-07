@@ -21,20 +21,20 @@ parameters:
 steps:
   - script: |
       echo "Inside pipeline-release.yml"
-      echo "County Id: ${{CountyId}}"
-      echo "County Name: ${{CountyName}}"
-      echo "Farm Id: ${{FarmId}}"
-      echo "Prefix: ${{Prefix}}"
+      echo "County Id: ${{parameters.CountyId}}"
+      echo "County Name: ${{parameters.CountyName}}"
+      echo "Farm Id: ${{parameters.FarmId}}"
+      echo "Prefix: ${{parameters.Prefix}}"
     displayName: 'Display Parameters Received in Release Pipeline'
   - template: /pipeline-template-bicep.yml
     parameters:
-      prefix: ${{Prefix}}
-      farmId: ${{FarmId}}
-      countyId: ${{CountyId}}
-      countyName: ${{CountyName}}
+      prefix: ${{parameters.Prefix}}
+      farmId: ${{parameters.FarmId}}
+      countyId: ${{parameters.CountyId}}
+      countyName: ${{parameters.CountyName}}
   - template: /pipeline-template-deploy.yml
     parameters:
-      prefix: ${{Prefix}}
-      farmId: ${{FarmId}}
-      countyId: ${{CountyId}}
-      countyName: ${{CountyName}}
+      prefix: ${{parameters.Prefix}}
+      farmId: ${{parameters.FarmId}}
+      countyId: ${{parameters.CountyId}}
+      countyName: ${{parameters.CountyName}}
