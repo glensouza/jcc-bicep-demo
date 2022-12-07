@@ -1,12 +1,12 @@
 Write-Host username: ${username}
 Write-Host username: ${env:username}
-Write-Host username: $env:{username}
-Write-Host username: ${env:(username)}
-Write-Host username: $(username)
-Write-Host username: $(env:username)
-Write-Host username: $env:(username)
-Write-Host username: $(env:username)
-Write-Host username: $(env:{username})
+#Write-Host username: $env:{username}
+#Write-Host username: ${env:(username)}
+#Write-Host username: $(username)
+#Write-Host username: $(env:username)
+#Write-Host username: $env:(username)
+#Write-Host username: $(env:username)
+#Write-Host username: $(env:{username})
 
 
 $pair = "$(username):$(personalaccesstoken)"
