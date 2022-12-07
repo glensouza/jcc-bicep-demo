@@ -1,6 +1,3 @@
-Write-Host basicAuth:  ${env:basicAuth}
-Write-Host LookingFor: "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx"
-
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
 $headers.Add("Authorization", ${env:basicAuth})
