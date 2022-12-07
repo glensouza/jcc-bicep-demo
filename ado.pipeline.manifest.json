@@ -1,24 +1,18 @@
 {
     "sites": [
         {
-            "court": {
-                "id": 1,
-                "name": "County One"
-            },
+            "courtId": 1,
+            "courtCode": "County One",
             "farmId": 1
         },
         {
-            "court": {
-                "id": 2,
-                "name": "County Two"
-            },
+            "courtId": 2,
+            "courtCode": "CountyTwo",
             "farmId": 1
         },
         {
-            "court": {
-                "id": 3,
-                "name": "County Three"
-            },
+            "courtId": 3,
+            "courtCode": "CountyThree",
             "farmId": 2
         }
     ]

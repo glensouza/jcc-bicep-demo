@@ -19,4 +19,4 @@ steps:
       echo "County Name: ${{CountyName}}"
       echo "Farm Id: ${{FarmId}}"
       echo "Prefix: ${{Prefix}}"
-    displayName: 'Display Parameters'
+    displayName: 'Display Parameters Received in Bicep Template'
