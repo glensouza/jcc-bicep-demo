@@ -1,4 +1,5 @@
 Write-Host username: ${env:username}
+Write-Host personalaccesstoken: ${env:personalaccesstoken}
 
 $pair = "${env:username}:${env:personalaccesstoken}"
 Write-Host pair: $pair
