@@ -1,14 +1,16 @@
-Write-Host username: ${env:username}
-Write-Host personalaccesstoken: ${env:personalaccesstoken}
-
 $pair = "${env:username}:${env:personalaccesstoken}"
 $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
 $base64 = [System.Convert]::ToBase64String($bytes)
 $basicAuthValue = "Basic $base64"
 
+Write-Host username: ${env:username}
+Write-Host personalaccesstoken: ${env:personalaccesstoken}
+Write-Host basicAuthValue: $basicAuthValue
+
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
 $headers.Add("Content-Type", "application/json")
-$headers.Add("Authorization", $basicAuthValue)
+#$headers.Add("Authorization", $basicAuthValue)
+$headers.Add("Authorization", "Basic Z2xlbnN0ZXI3NUBob3RtYWlsLmNvbToydzZ1bnN4eW4zMnppaDJwaDR1NWp4dWdsdHZpbjVtZG96cDJvYWZhNWRkdjI2YW5xZ2tx")
 
 $body = "{
 `n    `"definitionId`": { `"id`": 23 },
@@ -21,6 +23,3 @@ $body = "{
 `n    ]
 `n}
 `n"
-
-$response = Invoke-RestMethod 'https://dev.azure.com/glenster75/jcc%20Bicep%20Demo/_apis/pipelines/23/runs?&api-version=6.1-preview.1' -Method 'POST' -Headers $headers -Body $body
-$response | ConvertTo-Json
