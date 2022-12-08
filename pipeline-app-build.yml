@@ -8,6 +8,7 @@ trigger:
     - releasePipeline
     - pipeline-app-build.yml
     - pipeline-template-deploy.yml
+    - pipeline-release.yml
 
 pool:
   vmImage: ubuntu-latest

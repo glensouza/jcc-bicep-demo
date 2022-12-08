@@ -8,6 +8,7 @@ trigger:
     - releasePipeline
     - pipeline-infrastructure.yml
     - pipeline-template-bicep.yml
+    - pipeline-release.yml
 
 pool:
   vmImage: ubuntu-latest
