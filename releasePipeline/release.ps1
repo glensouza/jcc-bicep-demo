@@ -4,7 +4,7 @@ $headers.Add("Authorization", ${env:basicAuth})
 
 $body = "{
 `n    `"definitionId`": { `"id`": 23 },
-`n    `"templateParamenters`": [
+`n    `"templateParameters`": [
 `n        { `"countyId`": `"007`" },
 `n        { `"countyName`": `"MasterCounty`" },
 `n        { `"farmId`": `"521`" },
