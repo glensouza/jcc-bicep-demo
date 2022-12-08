@@ -9,7 +9,8 @@ $body = "{
 `n        `"CountyName`": `"MasterCounty`",
 `n        `"FarmId`": `"521`",
 `n        `"Prefix`": `"MasterPrefix`",
-`n        `"ImageLabel`": `"Ultimate`"
+`n        `"ImageLabel`": `"Ultimate`",
+`n        `"Test`": `"001|1|CountyA`n002|1|CountyB`n003|2|CountyC`"
 `n    }
 `n}
 `n"
